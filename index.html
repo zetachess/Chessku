@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goblin Chess Sudoku</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-animation" id="backgroundAnimation" aria-hidden="true"></div>
+
+  <main class="glass-container">
+    <section class="setup-screen" id="setupScreen">
+      <p class="eyebrow">Zeta Chess Arcade</p>
+      <h1 class="title">Goblin Chess Sudoku</h1>
+      <p class="rule-copy">Completa el tablero colocando las piezas de ajedrez. En cada fila, columna y caja 3x3 no puede repetirse ninguna pieza.</p>
+      <p class="tutorial">Esto es Sudoku con piezas de ajedrez. Cada pieza representa un numero oculto. No repitas piezas en filas, columnas ni cajas 3x3. Las piezas no se mueven como en ajedrez: son simbolos del Sudoku.</p>
+
+      <div class="form-group">
+        <label class="form-label" for="playerName">Jugador</label>
+        <input type="text" class="form-input" id="playerName" placeholder="Tu nombre" maxlength="20">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Dificultad</label>
+        <div class="level-grid">
+          <button class="level-option" data-level="easy" type="button">
+            <strong>Facil</strong>
+            <small>Mas pistas iniciales</small>
+          </button>
+          <button class="level-option selected" data-level="medium" type="button">
+            <strong>Media</strong>
+            <small>Reto equilibrado</small>
+          </button>
+          <button class="level-option" data-level="hard" type="button">
+            <strong>Dificil</strong>
+            <small>Menos pistas</small>
+          </button>
+          <button class="level-option" data-level="superhard" type="button">
+            <strong>Goblin</strong>
+            <small>Modo experto</small>
+          </button>
+        </div>
+      </div>
+
+      <button class="start-btn" onclick="startGame()">Jugar</button>
+    </section>
+
+    <section class="game-screen" id="gameScreen" aria-live="polite">
+      <header class="game-header">
+        <div class="brand-block">
+          <p>Goblin Chess Sudoku</p>
+          <strong id="playerDisplay"></strong>
+        </div>
+        <div class="game-stats">
+          <div class="stat"><span class="stat-value" id="timeDisplay">00:00</span><small>Tiempo</small></div>
+          <div class="stat"><span class="stat-value" id="movesDisplay">0</span><small>Movimientos</small></div>
+          <div class="stat"><span class="stat-value" id="hintsDisplay">3</span><small>Pistas</small></div>
+        </div>
+      </header>
+
+      <div class="status-line" id="statusLine">Elige una pieza</div>
+
+      <div class="sudoku-grid">
+        <table class="sudoku-table" id="sudokuTable" aria-label="Tablero de Goblin Chess Sudoku"></table>
+      </div>
+
+      <section class="piece-panel" aria-label="Piezas">
+        <div class="panel-title">Piezas</div>
+        <div class="number-pad" id="numberPad"></div>
+      </section>
+
+      <div class="game-controls">
+        <button class="control-btn" onclick="togglePause()" id="pauseBtn">Pausa</button>
+        <button class="control-btn" onclick="clearCell()">Borrar</button>
+        <button class="control-btn" onclick="getHint()">Pista</button>
+        <button class="control-btn" onclick="checkSolution()">Revisar</button>
+        <button class="control-btn" onclick="newGame()">Nueva partida</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="victory-modal" id="pauseModal">
+    <div class="victory-content">
+      <div class="victory-title">Partida en pausa</div>
+      <p>El temporizador esta detenido.</p>
+      <button class="start-btn" onclick="togglePause()">Continuar</button>
+    </div>
+  </div>
+
+  <div class="victory-modal" id="victoryModal">
+    <div class="victory-content victory-celebration">
+      <div class="victory-title">Victoria</div>
+      <div id="victoryMessage"></div>
+      <button class="start-btn" onclick="newGame()">Jugar otra vez</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
